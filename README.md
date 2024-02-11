@@ -21,6 +21,46 @@ He implementado una lista de tareas dinámica donde el usuario puede agregar, el
 
 4. **Marcar Tareas como Completadas:** Se puede marcar una tarea como completada haciendo clic en un botón "Cambiar" o un checkbox. La tarea cambia su estado a completada y se actualiza la lista automáticamente.
 
+## Solución a requerimientos 😉
+
+1. **Agregar Tareas:**
+```javascript
+let addNewTask = () => {
+    tareas.push({ id: Date.now(), tarea: input.value, estado: false })
+    taskListUpdate()
+    totalTasksInfo()
+    input.value = ''
+}
+```
+2. **Eliminar Tareas:**
+```javascript
+const deleteTask = (taskId) => {
+    let taskIndex = tareas.findIndex(task => task.id === taskId)
+    tareas.splice(taskIndex, 1)
+    taskList()
+}
+```
+3. **Conteo Total de Tareas:**
+```javascript
+let totalTasksInfo = () => {
+    totalTasksResume = tareas.length
+    totalTasks.innerHTML = totalTasksResume
+}
+```
+4. **Marcar Tareas como Completadas:**
+```javascript
+let updateCompletedTask = (taskId) => {
+    let taskIndex = tareas.findIndex(task => task.id === taskId)
+    if (tareas[taskIndex].estado === false) {
+        tareas[taskIndex].estado = true
+        totalCompletedTasksInfo()
+    } else if (tareas[taskIndex].estado === true) {
+        tareas[taskIndex].estado = false
+        totalCompletedTasksInfo()
+    }
+}
+```
+
 ## Estructura del Código 🧱
 
 El código HTML proporciona la estructura básica de la página, incluyendo un input para agregar nuevas tareas, una tabla para mostrar las tareas, y se enlaza con el archivo JavaScript para la funcionalidad dinámica.
